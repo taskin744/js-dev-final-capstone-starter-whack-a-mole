@@ -10,11 +10,32 @@ const hard = document.querySelector('.hard');
 const score = document.querySelector('#score'); // Use querySelector() to get the score element
 const timerDisplay = document.querySelector('#timer'); // use querySelector() to get the timer element.
 
+const song = new Audio('../assets/molesong.mp3');
+const hit = new Audio('../assets/hit.mp3')
+
 let time = 0;
 let timer;
 let lastHole = 0;
 let points = 0;
 let difficulty = "hard";
+
+
+function playAudio(audioObject) {
+  audioObject.play();
+}
+
+function loopAudio(audioObject) {
+  audioObject.loop = true;
+  playAudio(audioObject);
+}
+
+function stopAudio(audioObject) {
+  audioObject.pause();
+}
+
+function play() {
+  playAudio(song);
+}
 
 /**
  * Generates a random integer within a range.
@@ -174,6 +195,7 @@ function updateScore() {
   // TODO: Write your code here
   points += 1;
   score.textContent = points;
+  //playAudio(hit);
   return points;
 }
 
@@ -263,7 +285,7 @@ function setDuration(duration) {
 *
 */
 function stopGame(){
-  // stopAudio(song);  //optional
+  //stopAudio(song);  //optional
   clearInterval(timer);
   return "game stopped";
 }
@@ -276,6 +298,7 @@ function stopGame(){
 */
 function startGame(){
   setDuration(10);
+  //play();
   showUp();
   setEventListeners();
   startTimer();
